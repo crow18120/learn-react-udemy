@@ -3,6 +3,7 @@ import ExpensiveItem from "./ExpensiveItem";
 import Card from "../UI/Card";
 
 function Expensive(props) {
+
     const expenses = [
         {
           title: "Car Insurance",
