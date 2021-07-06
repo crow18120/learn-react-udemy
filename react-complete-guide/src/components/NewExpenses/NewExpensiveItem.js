@@ -1,10 +1,20 @@
 import "./NewExpensiveItem.css";
 import FormNewExpensive from "./FormNewExpensive";
+import { useState } from "react";
 
-const NewExpensiveItem = () => {
+const NewExpensiveItem = (props) => {
+  const saveNewExpenseHandler = (obj) => {
+    const newExpense = {
+      ...obj,
+      id: Math.random().toString(),
+    };
+
+    props.onSaveNewExpense(newExpense);
+  };
+
   return (
     <div className="new-expense">
-      <FormNewExpensive />
+      <FormNewExpensive onSave={saveNewExpenseHandler} />
     </div>
   );
 };
