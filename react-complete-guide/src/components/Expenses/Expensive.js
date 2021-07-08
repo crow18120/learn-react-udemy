@@ -1,22 +1,29 @@
 import "./Expensive.css";
-import ExpensiveItem from "./ExpensiveItem";
+import ExpensesList from "./ExpensesList";
+import ExpensiveFilter from "./ExpensiveFilter";
 import Card from "../UI/Card";
+import { useState } from "react";
 
 function Expensive(props) {
+  const [filteredYear, setFilteredYear] = useState("2021");
 
-      const expensesList = props.expenses
-   
-      return (
-        <Card className="expenses">
-          {
-            expensesList.map(expenses => <ExpensiveItem item={expenses}></ExpensiveItem>)
-          }
-          {/* <ExpensiveItem item={props.expenses[0]}></ExpensiveItem>
-          <ExpensiveItem item={props.expenses[1]}></ExpensiveItem>
-          <ExpensiveItem item={props.expenses[2]}></ExpensiveItem> */}
-        </Card>
-      );
+  const filterChangeHandler = (selectedYear) => {
+    setFilteredYear(selectedYear);
+  };
+
+  const filteredExpenses = props.expenses.filter(
+    (el) => el.date.getFullYear().toString() === filteredYear
+  );
+
+  return (
+    <Card className="expenses">
+      <ExpensiveFilter
+        selected={filteredYear}
+        onChangeFilter={filterChangeHandler}
+      />
+      <ExpensesList item={filteredExpenses}/>  
+    </Card>
+  );
 }
 
 export default Expensive;
- 
